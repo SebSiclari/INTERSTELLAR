@@ -20,17 +20,17 @@ const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const RegisterUser = () => {
+  // const RegisterUser = () => {
 
-    createUserWithEmailAndPassword(authentication, email, password)
-      .then(re => {
-        console.log(re);
-        setIsSignedIn(true);
-      })
-      .catch(re => {
-        console.log(re);
-      });
-  };
+  //   createUserWithEmailAndPassword(authentication, email, password)
+  //     .then(re => {
+  //       console.log(re);
+  //       setIsSignedIn(true);
+  //     })
+  //     .catch(re => {
+  //       console.log(re);
+  //     });
+  // };
 
   const SignInUser = () => {
     signInWithEmailAndPassword(authentication, email, password)
@@ -43,15 +43,15 @@ const LogIn = () => {
       });
   };
 
-  const SignOutUser = () => {
-    signOut(authentication)
-      .then(re => {
-        console.log(re);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
+  // const SignOutUser = () => {
+  //   signOut(authentication)
+  //     .then(re => {
+  //       console.log(re);
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // };
 
   const handleNavigation=()=>{
     navigation.navigate('MyTabs')
@@ -71,7 +71,7 @@ const LogIn = () => {
           secureTextEntry={true}
           onChangeText={text => setPassword(text)}
         />
-        
+
       <Pressable  style={styles.button} onPress={SignInUser}>
         <Text style={styles.buttonText} onPress={handleNavigation}> SIGN IN </Text>
       </Pressable>

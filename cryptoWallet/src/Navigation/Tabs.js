@@ -1,5 +1,4 @@
 import React from "react";
-import Individual from '../Screens/Detail';
 import Market from '../Screens/Market';
 import WatchList from '../Screens/WatchList';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';

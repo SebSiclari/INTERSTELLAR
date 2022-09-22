@@ -1,8 +1,8 @@
 
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 
-import {marketReducer} from './Market/marketReducer'
+// import {marketReducer} from './Market/marketReducer'
 
-export default combineReducers({
-  marketReducer
-})
+// export default combineReducers({
+//   marketReducer
+// })
