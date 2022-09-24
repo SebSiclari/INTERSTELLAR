@@ -5,6 +5,7 @@ export const getDetailedCoinData = async(coinId) => {
   try{
 
     const response= await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}?tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=true`)
+    console.log('COIN DATA', response.data)
     return response.data
 
   }

@@ -5,6 +5,7 @@ import LogIn from './Screens/LogIn';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Market from './Screens/Market';
 import MyTabs from './Navigation/Tabs';
+import Dashboard from './Components/Dashboard'
 import CoinDetails from './Screens/CoinDetail';
 // import { Provider } from 'react-redux';
 // import {createStore} from 'redux';
@@ -22,8 +23,7 @@ const App = () => {
     <NavigationContainer>
     <Stack.Navigator>
     <Stack.Screen name='Login' component={LogIn}/>
-    <Stack.Screen name="Market" component={Market}/>
-    <Stack.Screen name="MyTabs" component={MyTabs}/>
+    <Stack.Screen name="Dashboard" component={Dashboard}/>
     <Stack.Screen name='CoinDetails' component={CoinDetails}/>
     </Stack.Navigator>
     </NavigationContainer>

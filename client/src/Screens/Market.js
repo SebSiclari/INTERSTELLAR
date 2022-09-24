@@ -43,16 +43,16 @@ const Market = () => {
 
   const navigation= useNavigation();
 
-  const handleNavigation=()=>{
-    return navigation.navigate('CoinDetails')
-  }
+  // const handleNavigation=()=>{
+  //   return navigation.navigate('CoinDetails')
+  // }
 
   return (
     <View style={styles.container}>
     <FlatList
     data={coins}
     keyExtractor={item=> item.id}
-    renderItem = {({item})=> <Pressable onPress={handleNavigation}><CoinItem key={item.id} marketCoin={item} /></Pressable>}
+    renderItem = {({item})=> <CoinItem key={item.id} marketCoin={item} />}
     refreshControl={
       <RefreshControl
       refreshing={loading}

@@ -54,7 +54,7 @@ const LogIn = () => {
   // };
 
   const handleNavigation=()=>{
-    navigation.navigate('MyTabs')
+    navigation.navigate('Dashboard')
   }
 
   return (

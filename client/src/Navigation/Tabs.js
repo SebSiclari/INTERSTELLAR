@@ -11,7 +11,6 @@ function MyTabs() {
       <Tab.Screen name="Market" component={Market}   />
       <Tab.Screen name="WatchList" component={WatchList} />
     </Tab.Navigator>
-    <Text>MyTabs</Text>
     </>
   );
 }

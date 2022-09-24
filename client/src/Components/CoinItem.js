@@ -6,8 +6,9 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 const CoinItem = ({marketCoin}) => {
 
+
   const {name, image, market_cap_rank, symbol, current_price,
-  price_change_percentage_24h, market_cap } = marketCoin;
+  price_change_percentage_24h, market_cap, id } = marketCoin;
 
   const marketCap = (marketCap) =>{
 
@@ -21,11 +22,13 @@ const CoinItem = ({marketCoin}) => {
   const navigation= useNavigation();
 
   const handleNavigation=()=>{
-    return navigation.navigate('CoinDetail')
+     navigation.navigate('CoinDetails', {coinId: id})
   }
 
   return (
-    <View style={styles.coinContainer} onPress={handleNavigation}>
+    <Pressable onPress={handleNavigation}>
+
+    <View style={styles.coinContainer}>
     <Image
       source={{
         uri:image,
@@ -50,6 +53,8 @@ const CoinItem = ({marketCoin}) => {
     <Text style={styles.text}>MCap {marketCap(market_cap)}</Text>
     </View>
     </View>
+    </Pressable>
+
   )
 }
 
