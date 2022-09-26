@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image, Pressable} from 'react-native'
 import React from 'react'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import WatchList from '../Screens/WatchList';
 
 
 
-const CoinItem = ({marketCoin}) => {
-
+const CoinItem = ({marketCoin, watchList, setWatchList}) => {
 
   const {name, image, market_cap_rank, symbol, current_price,
   price_change_percentage_24h, market_cap, id } = marketCoin;
@@ -22,7 +22,8 @@ const CoinItem = ({marketCoin}) => {
   const navigation= useNavigation();
 
   const handleNavigation=()=>{
-     navigation.navigate('CoinDetails', {coinId: id})
+     navigation.navigate('CoinDetails', {marketCoin,
+    watchList, setWatchList})
   }
 
   return (
@@ -42,14 +43,16 @@ const CoinItem = ({marketCoin}) => {
     />
     <View>
     <Text style={styles.title}>{name}</Text>
-    <View style={styles.rankContainer}>
-    <Text style={styles.rank}>{market_cap_rank}</Text>
+    <View style={{flexDirection:'row'}}>
+    <View style={ styles.rankContainer}>
+    <Text style={market_cap_rank <= 99 ? styles.rank : styles.rankOver}>{market_cap_rank}</Text>
     </View>
-    <Text style={styles.text}>{symbol}</Text>
-    <Text style={styles.text}>{price_change_percentage_24h}</Text>
+    <Text style={styles.text}>{symbol.toUpperCase()}</Text>
+    <Text style={ price_change_percentage_24h > 0 ? styles.textGreen : styles.textRed}>{(price_change_percentage_24h*100).toFixed(2)}%</Text>
+    </View>
     </View>
     <View style={{marginLeft:'auto'}}>
-    <Text style={styles.text}>{current_price}</Text>
+    <Text style={styles.currentPriceText}>{current_price}</Text>
     <Text style={styles.text}>MCap {marketCap(market_cap)}</Text>
     </View>
     </View>
@@ -74,16 +77,50 @@ const styles = StyleSheet.create({
   },
   text:{
     color:'white',
-    marginRight:5
+    marginLeft:5,
+    marginRight:5,
+    justifyContent:'center'
+  },
+  currentPriceText:{
+    fontWeight:'bold',
+    color:'white',
+    marginLeft:5,
+    marginRight:5,
+    juststifyContent:'center',
+    textAlign:'right'
+
+
+  },
+  textGreen:{
+    color:'green'
+  },
+  textRed:{
+    color:'red'
   },
   rank:{
+    fontSize:12,
     fontWeight:'bold',
     color:'white',
     marginRight: 5,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  rankOver:
+  {
+    size:100,
+    fontWeight:'bold',
+    color:'white',
+    marginRight: 5,
+    justifyContent:'center',
+    alignItems:'center'
   },
   rankContainer:{
     backgroundColor:'#585858',
     padding:2,
     borderRadius:5,
-  }
+    width:30,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+
 })

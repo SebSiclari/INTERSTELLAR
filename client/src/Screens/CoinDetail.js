@@ -8,33 +8,48 @@ import Animated from 'react-native-reanimated';
 import {ChartDot, ChartPath, ChartPathProvider} from '@rainbow-me/animated-charts';
 import CoinDetailHeader from '../Components/CoinDetailHeader';
 import { LineChart } from 'react-native-wagmi-charts';
+import Filters from '../Components/Filters';
 
 
 const CoinDetails = ({ route,  navigation}) => {
+// price state to be updated
+
+
 
   const [coin, setCoin] = useState(null);
   const [coinMarketData, setCoinMarketData]= useState(null);
+  // const [currPrice, setCurrPrice] = useState(coin.market_data.current_price)
 
-  const {coinId} = route.params
+  const {marketCoin, setWatchList, watchList} = route.params
+
 
   const [loading, setLoading]= useState(false);
   const [coinValue, setCoinValue]= useState('1');
   const [usdValue, setUsdValue] = useState('2');
+  const [selectedRange, setSelectedRange]=useState('1');
 
 
   const fetchCoinData= async()=>{
     setLoading(true)
-    const fetchedCoinData = await getDetailedCoinData(coinId);
-    const fetchMarketData= await getChartData(coinId);
+    const fetchedCoinData = await getDetailedCoinData(marketCoin.id);
+    const fetchMarketData= await getChartData(marketCoin.id);
+    console.log('FECHED DATA', fetchedCoinData)
     setCoin(fetchedCoinData)
     setCoinMarketData(fetchMarketData);
     setUsdValue(fetchedCoinData.market_data.current_price.usd.toString())
     setLoading(false)
   }
 
+  const fetchMarketCoinData = async (selectedRangeValue) =>{
+    const fetchedCoinMarketData = await getChartData(marketCoin.id, selectedRangeValue)
+    setCoinMarketData(fetchedCoinMarketData);
+    setLoading(false);
+  }
+
   useEffect(()=>{
 
     fetchCoinData()
+    fetchMarketCoinData(1)
   },[]);
 
 
@@ -43,6 +58,7 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
 
   const {
     image: {small},
+    id,
     name,
     symbol,
     market_data:{
@@ -85,24 +101,44 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
 
   }
 
+  const onSelectedRangeChange=(selectedRangeValue)=>{
+    setSelectedRange(selectedRangeValue)
+    fetchMarketCoinData(selectedRangeValue)
+  }
+
 
   return (
     <View style={styles.container}>
     <CoinDetailHeader
+    marketCoin={marketCoin}
+    setWatchList={setWatchList}
     image={small}
+    watchList={watchList}
     symbol={symbol}
     marketCapRank={market_cap_rank}
-    />
+    coinId={marketCoin.id}
+    name={name}    />
 
     <View style={{padding:15}}>
     <View>
       <Text style={{color:'white'}}>{name} </Text>
-      <Text style={styles.priceText}>{current_price.usd} </Text>
-    </View>
-    <View style={{backgroundColor:'red', paddingHorizontal:3,
-    paddingVertical:8, borderRadius:5, flexDirection:'row',}}>
+      <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+      <Text style={styles.priceText}>${current_price.usd} </Text>
+      <View style={{backgroundColor:'red', paddingHorizontal:3,
+    paddingVertical:8, borderRadius:5, flexDirection:'row', width:70}}>
     <Text style={{color:'white'}}> {price_change_percentage_24h.toFixed(2)}%</Text>
     </View>
+
+      </View>
+
+    </View>
+    </View>
+    <View style={styles.filtersContainer}>
+      <Filters filterDay='1' filterText='24h' selectedRange={selectedRange} setSelectedRange={onSelectedRangeChange} />
+      <Filters filterDay='7' filterText='7d'  selectedRange={selectedRange} setSelectedRange={onSelectedRangeChange} />
+      <Filters filterDay='30' filterText='30d' selectedRange={selectedRange} setSelectedRange={onSelectedRangeChange} />
+      <Filters filterDay='365' filterText='1y'  selectedRange={selectedRange} setSelectedRange={onSelectedRangeChange} />
+      <Filters filterDay='max' filterText='All' selectedRange={selectedRange} setSelectedRange={onSelectedRangeChange} />
     </View>
     <LineChart.Provider data={prices.map(([x,y])=>({timestamp:x, value: y}))} >
       <LineChart >
@@ -114,16 +150,16 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
     </LineChart.Provider>
 
 
-    <View style={{flexDirection:'row', flex:1}}>
-    <View style={{flexDirection:'row', flex:1}}>
-      <Text style={{color:'white', alignSelf:'center'}}>{symbol.toUpperCase()}</Text>
+    <View style={{flexDirection:'row', flex:1 }}>
+    <View style={{flexDirection:'row',flex:1 }}>
+      <Text style={{color:'white'}}>{symbol.toUpperCase()}</Text>
       <TextInput
       style={styles.input}
       value={coinValue.toString()}
       onChangeText={changeCoinValue} />
     </View>
-    <View>
-    <Text>{symbol.toUpperCase()}</Text>
+    <View style={{flexDirection:'row', flex:1}}>
+    <Text style={{color:'white',}}>USD</Text>
       <TextInput style={styles.input}
       value={usdValue.toString()}
       keyboardType='numeric'
@@ -160,6 +196,7 @@ const styles= StyleSheet.create({
 
   },
   input:{
+    flex:1,
     width:130,
     height:40,
     margin:12,
@@ -168,6 +205,15 @@ const styles= StyleSheet.create({
     padding:10,
     fontSize:16,
     color:'white'
+  },
+  filtersContainer:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+    backgroundColor:'#2B2B2B',
+    paddingVertical:5,
+    borderRadius:5,
+    marginHorizontal:10,
+    marginVertical: 10
   }
 
 })

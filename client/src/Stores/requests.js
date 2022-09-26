@@ -10,16 +10,16 @@ export const getDetailedCoinData = async(coinId) => {
 
   }
   catch(e){
-    console.log(e);
+    console.log('ERROR COINT DETAL: ',e);
   }
 }
 
 // this is for the details on the chart on the details page
 
-export const getChartData = async (coinId) => {
+export const getChartData = async (coinId, selectedRange) => {
 
   try{
-    const response= await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=1&interval=hourly%20`)
+    const response= await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${selectedRange}&interval=hourly%20`)
     return response.data;
   }
   catch(e){

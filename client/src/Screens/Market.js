@@ -18,7 +18,9 @@ const Market = () => {
   const [loading, setloading]= useState(false);
 
   const fetchCoins= async(pageNumber) =>{
-    if(loading) return;
+    if(loading) {
+      return;
+    }
     setloading(true);
     const coinsData= await getMarketData(pageNumber)
     setCoins((existingCoins)=>([...existingCoins, ...coinsData]));
@@ -43,16 +45,14 @@ const Market = () => {
 
   const navigation= useNavigation();
 
-  // const handleNavigation=()=>{
-  //   return navigation.navigate('CoinDetails')
-  // }
 
   return (
     <View style={styles.container}>
     <FlatList
     data={coins}
-    keyExtractor={item=> item.id}
-    renderItem = {({item})=> <CoinItem key={item.id} marketCoin={item} />}
+    keyExtractor={item=> item._id}
+    renderItem = {({item})=> <CoinItem  marketCoin={item} />}
+    onEndReached={()=> fetchCoins((coins.length/100)+1)}
     refreshControl={
       <RefreshControl
       refreshing={loading}
