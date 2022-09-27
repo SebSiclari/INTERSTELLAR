@@ -62,7 +62,7 @@ export default function CoinDetailHeader({setWatchList, marketCoin,watchList,coi
     <View style={styles.headerContainer}>
       <View style={styles.tickerContainer}>
         <Image source={{ uri: image }} style={{ width: 25, height: 25 }} />
-        <Text style={{ color: 'white' }}>{symbol.toUpperCase()}</Text>
+
         <View style={styles.rankContainer}>
           <Text style={styles.rankText}>#{marketCapRank}</Text>
         </View>
@@ -102,15 +102,18 @@ const styles = StyleSheet.create({
   tickerContainer:{
     flexDirection:'row',
     alignItems:'center',
+    marginTop:5
 
   },
   rankContainer:{
     backgroundColor:'#585858',
     padding:2,
     borderRadius:5,
-    width:35,
+    width:40,
+    alignText:'center',
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginLeft:5,
   },
   rankText:{
     color:'white',

@@ -167,7 +167,7 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
       <View style={styles.price_container}>
         <View style={{flexDirection:'row'}}>
           <View style={{justifyContent:'center'}}>
-            <Text style={{color:'white', fontSize:20}}>{symbol.toUpperCase()}</Text>
+            <Text style={{color:'white', fontSize:20,  marginRight:15}}>{symbol.toUpperCase()}</Text>
           </View>
           <TextInput
           style={styles.input}
@@ -177,7 +177,7 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
         </View>
         <View style={{flexDirection:'row'}}>
           <View style={{justifyContent:'center'}}>
-            <Text style={{color:'white', fontSize: 20}}>USD</Text>
+            <Text style={{color:'white', fontSize: 20, marginRight:15}}>USD</Text>
           </View>
           <TextInput style={styles.input}
           value={usdValue.toString()}
@@ -236,7 +236,9 @@ const styles= StyleSheet.create({
     marginHorizontal:10,
     marginVertical: 10
   },
-  footer:{ }
+  footer:{
+    marginTop:40
+   }
 })
 
 export default CoinDetails;

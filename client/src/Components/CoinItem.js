@@ -49,7 +49,7 @@ const CoinItem = ({marketCoin, watchList, setWatchList}) => {
     <View style={ styles.rankContainer}>
     <Text style={market_cap_rank <= 99 ? styles.rank : styles.rankOver}>{market_cap_rank}</Text>
     </View>
-    <Text style={styles.text}>{symbol}</Text>
+    <Text style={styles.text}>{symbol.toUpperCase()}</Text>
     <Text style={ price_change_percentage_24h > 0 ? styles.textGreen : styles.textRed}>{price_change_percentage_24h ? price_change_percentage_24h.toFixed(2) : null}%</Text>
     </View>
     </View>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#585858',
     padding:2,
     borderRadius:5,
-    width:30,
+    width:35,
     alignItems:'center',
     justifyContent:'center'
   },
