@@ -31,8 +31,7 @@ const WatchList = ({coinId, name, image, symbol, marketCapRank,current_price, ma
   <FlatList
   data={watchlist}
   keyExtractor={item=> item.id}
-  renderItem={({item})=>{ return <CoinItem key={item.id} watchlist=
-  {watchlist} marketCoin={item}/> }}
+  renderItem={({item})=>{ return <CoinItem key={item.id} watchlist={watchlist} marketCoin={item}/> }}
   />
     </View>
   );

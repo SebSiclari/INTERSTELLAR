@@ -39,10 +39,10 @@ function MyTabs() {
     <>
     <Tab.Navigator  screenOptions={{headerShown:false}} >
     <Tab.Screen name="Market"  >
-      {(props)=> <CoinList list={'market'} {...childProps} />}
+      {(props)=> <CoinList  setMarket={setMarket} setWatchList={setWatchList} list={'market'} {...childProps} />}
     </Tab.Screen>
     <Tab.Screen name="WatchList" >
-      {(props)=> <CoinList list={'watchList'} {...childProps}/>}
+      {(props)=> <CoinList  setMarket={setMarket} setWatchList={setWatchList} list={'watchList'} {...childProps}/>}
     </Tab.Screen>
     <Tab.Screen name='Profile' component={Profile} />
     </Tab.Navigator>

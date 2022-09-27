@@ -32,3 +32,18 @@ exports.postCoins = async(req, res)=>{
 
 
 }
+
+exports.deleteCoin= async (req, res) =>{
+
+  try{
+    await model.findByIdAndDelete(req.params.id);
+    res.send('Deleted')
+    res.status(201)
+
+  }
+  catch(e){
+    console.log(e);
+    res.status(500)
+
+  }
+}

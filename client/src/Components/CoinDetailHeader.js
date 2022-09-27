@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Ionicons from 'react-native-vector-icons'
 import FavButton from '../Components/FavButton'
 
-export default function CoinDetailHeader({setWatchList, marketCoin,watchList,coinId, name, image, symbol, marketCapRank, current_price, market_cap, price_change_percentage}) {
+export default function CoinDetailHeader({setWatchList, marketCoin,watchList,coinId, image, symbol, marketCapRank, price_change_percentage_24h, current_price, market_cap, name}) {
 
 
 
@@ -67,18 +67,19 @@ export default function CoinDetailHeader({setWatchList, marketCoin,watchList,coi
           <Text style={styles.rankText}>#{marketCapRank}</Text>
         </View>
       </View>
-    <View style={styles.button}><FavButton
+    <View style={styles.button}>
+      <FavButton
           watchList={watchList}
           setWatchList={setWatchList}
           coinId={coinId}
+          marketCoin={marketCoin}
           name={name}
           image={image}
-          symbol={symbol}
           marketCapRank={marketCapRank}
+          symbol={symbol}
           current_price={current_price}
-          market_cap={market_cap}
-          price_change_percentage={price_change_percentage}
-          marketCoin={marketCoin} />
+          price_change_percentage_24h={price_change_percentage_24h}
+          market_cap={market_cap} />
       </View>
       </View>
 
@@ -86,6 +87,11 @@ export default function CoinDetailHeader({setWatchList, marketCoin,watchList,coi
 }
 
 const styles = StyleSheet.create({
+  button: {
+    position:'absolute',
+    right: 14,
+
+  },
   headerContainer:{
     flexDirection:'row',
     paddingHorizontal: 10,
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#585858',
     padding:2,
     borderRadius:5,
-    width:30,
+    width:35,
     alignItems:'center',
     justifyContent:'center'
   },

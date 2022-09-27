@@ -1,16 +1,12 @@
-import { StyleSheet, Text, Pressable, View,Button } from 'react-native'
+import { StyleSheet, Text, Pressable, Image, View } from 'react-native'
 import{useState} from 'react'
 import React from 'react'
 
 
-const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, marketCapRank,current_price, market_cap, price_change_percentage}) => {
+const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, marketCapRank,current_price, market_cap, price_change_percentage_24h}) => {
 
-
-  const [isFav, setIsFav] = useState(watchList.some(coin => marketCoin.name === coin.name))
-  // let isFav = watchList?.map(e=> {
-  //   console.log('XANKS',e.name)
-  //   return e.name}).indexOf(name) === -1 ? false : true
-
+console.warn(marketCapRank)
+  const [isFav, setIsFav] = useState(watchList.some(coin => marketCoin.name === coin.name));
 
 
   const addCoinToWatchList= async (coin) =>{
@@ -24,10 +20,10 @@ const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, ma
       body: JSON.stringify({
         name: name,
         image:image,
-        marketCapRank:marketCapRank,
+        market_cap_rank:marketCapRank,
         symbol:symbol,
-        currentPrice: current_price,
-        priceChangePercentage:price_change_percentage,
+        current_price: current_price,
+        price_change_percentage:price_change_percentage_24h,
         market_cap:market_cap
       })
     })
@@ -66,7 +62,7 @@ const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, ma
         symbol: symbol,
         marketCapRank: marketCapRank,
         currentPrice: current_price,
-        priceChangePercentage:price_change_percentage,
+        priceChangePercentage:price_change_percentage_24h,
         market_cap:market_cap
       }
 
@@ -79,7 +75,10 @@ const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, ma
 
 
     return (
-    <Pressable style={styles.button} onPress={isFav ? handleRemove : handleAdd }>{isFav ? <Text>X</Text> : <Text>Add</Text> }</Pressable>
+    <Pressable style={styles.button} onPress={
+      isFav ? handleRemove : handleAdd }>
+       <Text style={{color:'white'}}>{isFav ? 'X': 'Add'}</Text>
+       </Pressable>
     )
 
 }
@@ -88,8 +87,13 @@ export default FavButton;
 
 const styles = StyleSheet.create({
   button:{
-    height:25,
-    width:25,
-    backgroundColor:'white'
+    height:30,
+    width:30,
   },
+  image:{
+    color:'#121212',
+    width:30,
+    height:30,
+  },
+
 })

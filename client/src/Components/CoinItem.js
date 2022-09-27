@@ -10,6 +10,9 @@ const CoinItem = ({marketCoin, watchList, setWatchList}) => {
   const {name, image, market_cap_rank, symbol, current_price,
   price_change_percentage_24h, market_cap, id } = marketCoin;
 
+  console.warn(price_change_percentage_24h)
+
+
   const marketCap = (marketCap) =>{
 
     if(marketCap > 1_000_000_000_000) return `${Math.floor(marketCap / 1_000_000_000_000)}T`
@@ -47,8 +50,8 @@ const CoinItem = ({marketCoin, watchList, setWatchList}) => {
     <View style={ styles.rankContainer}>
     <Text style={market_cap_rank <= 99 ? styles.rank : styles.rankOver}>{market_cap_rank}</Text>
     </View>
-    <Text style={styles.text}>{symbol.toUpperCase()}</Text>
-    <Text style={ price_change_percentage_24h > 0 ? styles.textGreen : styles.textRed}>{(price_change_percentage_24h*100).toFixed(2)}%</Text>
+    <Text style={styles.text}>{symbol}</Text>
+    <Text style={ price_change_percentage_24h > 0 ? styles.textGreen : styles.textRed}>{price_change_percentage_24h ? price_change_percentage_24h.toFixed(2) : null}</Text>
     </View>
     </View>
     <View style={{marginLeft:'auto'}}>

@@ -58,19 +58,26 @@ const LogIn = () => {
   }
 
   return (
-    <SafeAreaView>
-    <View>
+    <SafeAreaView style={{backgroundColor:'#121212',flex:1}}>
+    <View style={styles.Login}>
+    <View style={styles.inputContainers}>
     <TextInput
+    style={{color:'white'}}
     placeholder="Email"
+    placeholderTextColor={'white'}
     value={email}
     onChangeText={text => setEmail(text)}
         />
+
         <TextInput
+          style={{color:'white'}}
           placeholder="Password"
           value={password}
+          placeholderTextColor={'white'}
           secureTextEntry={true}
           onChangeText={text => setPassword(text)}
         />
+        </View>
 
       <Pressable  style={styles.button} onPress={SignInUser}>
         <Text style={styles.buttonText} onPress={handleNavigation}> SIGN IN </Text>
@@ -93,6 +100,13 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   buttonText:{
+    color:'white'
+  },
+  Login:{
+    marginTop:300,
+    color:'white'
+  },
+  inputContainers:{
     color:'white'
   }
 })

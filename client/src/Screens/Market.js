@@ -21,19 +21,30 @@ const Market = () => {
     if(loading) {
       return;
     }
+    try {
     setloading(true);
     const coinsData= await getMarketData(pageNumber)
     setCoins((existingCoins)=>([...existingCoins, ...coinsData]));
     setloading(false);
+    }
+    catch(e){
+      console.log(e);
+    }
 
   }
 
   const refetchCoins= async() =>{
     if(loading) return;
+    try{
     setloading(true);
     const coinsData= await getMarketData()
     setCoins(coinsData);
-    setloading(false)
+    setloading(false);
+  }
+
+    catch(e){
+      console.log(e);
+    }
 
   }
 

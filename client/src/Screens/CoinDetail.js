@@ -29,12 +29,12 @@ const CoinDetails = ({ route,  navigation}) => {
   const [selectedRange, setSelectedRange]=useState('1');
 
 
-  const fetchCoinData= async()=>{
+  const fetchCoinData = async()=>{
     setLoading(true)
     const fetchedCoinData = await getDetailedCoinData(marketCoin.id);
     const fetchMarketData= await getChartData(marketCoin.id);
     console.log('FECHED DATA', fetchedCoinData)
-    setCoin(fetchedCoinData)
+    setCoin(fetchedCoinData);
     setCoinMarketData(fetchMarketData);
     setUsdValue(fetchedCoinData.market_data.current_price.usd.toString())
     setLoading(false)
@@ -45,8 +45,12 @@ const CoinDetails = ({ route,  navigation}) => {
     setCoinMarketData(fetchedCoinMarketData);
     setLoading(false);
   }
-
+  const onSelectedRangeChange=(selectedRangeValue)=>{
+    setSelectedRange(selectedRangeValue)
+    fetchMarketCoinData(selectedRangeValue)
+  }
   useEffect(()=>{
+    setTimeout(()=>{onSelectedRangeChange('1')}, 2000)
 
     fetchCoinData()
     fetchMarketCoinData(1)
@@ -64,9 +68,12 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
     market_data:{
       market_cap_rank,
       current_price,
-      price_change_percentage_24h
+      price_change_percentage_24h,
+      market_cap
     }
   } = coin;
+
+  console.warn(coin)
 
   const {prices} = coinMarketData;
 
@@ -101,15 +108,15 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
 
   }
 
-  const onSelectedRangeChange=(selectedRangeValue)=>{
-    setSelectedRange(selectedRangeValue)
-    fetchMarketCoinData(selectedRangeValue)
-  }
+
+
+
 
 
   return (
     <View style={styles.container}>
     <CoinDetailHeader
+    current_price={current_price}
     marketCoin={marketCoin}
     setWatchList={setWatchList}
     image={small}
@@ -117,7 +124,10 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
     symbol={symbol}
     marketCapRank={market_cap_rank}
     coinId={marketCoin.id}
-    name={name}    />
+    name={coin.name}
+    price_change_percentage_24h={ price_change_percentage_24h}
+    market_cap={1111}
+     />
 
     <View style={{padding:15}}>
     <View>
@@ -144,29 +154,39 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
       <LineChart >
         <LineChart.Path color={chartColor} />
         <LineChart.CursorCrosshair color={chartColor} >
-          <LineChart.Tooltip textStyle={{ color:'white'}} />
+          <LineChart.Tooltip textStyle={{ color:'white',
+          backgroundColor:'#585858',
+          borderRadius:4,
+          fontSize:15,
+          padding:4
+          }} />
         </LineChart.CursorCrosshair>
       </LineChart>
     </LineChart.Provider>
 
-
-    <View style={{flexDirection:'row', flex:1 }}>
-    <View style={{flexDirection:'row',flex:1 }}>
-      <Text style={{color:'white'}}>{symbol.toUpperCase()}</Text>
-      <TextInput
-      style={styles.input}
-      value={coinValue.toString()}
-      onChangeText={changeCoinValue} />
-    </View>
-    <View style={{flexDirection:'row', flex:1}}>
-    <Text style={{color:'white',}}>USD</Text>
-      <TextInput style={styles.input}
-      value={usdValue.toString()}
-      keyboardType='numeric'
-      onChangeText={changeUsdValue}
-      />
-
-    </View>
+    <View style={styles.footer}>
+      <View style={styles.price_container}>
+        <View style={{flexDirection:'row'}}>
+          <View style={{justifyContent:'center'}}>
+            <Text style={{color:'white', fontSize:20}}>{symbol.toUpperCase()}</Text>
+          </View>
+          <TextInput
+          style={styles.input}
+          value={coinValue.toString()}
+          onChangeText={changeCoinValue}
+          />
+        </View>
+        <View style={{flexDirection:'row'}}>
+          <View style={{justifyContent:'center'}}>
+            <Text style={{color:'white', fontSize: 20}}>USD</Text>
+          </View>
+          <TextInput style={styles.input}
+          value={usdValue.toString()}
+          keyboardType='numeric'
+          onChangeText={changeUsdValue}
+          />
+        </View>
+      </View>
     </View>
     </View>
   );
@@ -195,15 +215,17 @@ const styles= StyleSheet.create({
     color:'white',
 
   },
+  price_container: {
+    flexDirection:'row',
+    justifyContent:'space-evenly'
+  },
   input:{
-    flex:1,
-    width:130,
+    width:100,
     height:40,
-    margin:12,
     borderBottomWidth: 1,
     borderBottomColor:'white',
     padding:10,
-    fontSize:16,
+    fontSize:20,
     color:'white'
   },
   filtersContainer:{
@@ -214,8 +236,8 @@ const styles= StyleSheet.create({
     borderRadius:5,
     marginHorizontal:10,
     marginVertical: 10
-  }
-
+  },
+  footer:{ }
 })
 
 export default CoinDetails;

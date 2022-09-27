@@ -5,7 +5,9 @@ const coinSchema= new Schema({
   name:String,
   image:String,
   market_cap_rank: Number,
+  symbol:String,
   current_price:Number,
+  price_change_percentage_24h:Number,
   market_cap: Number,
 })
 
