@@ -73,7 +73,6 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
     }
   } = coin;
 
-  console.warn(coin)
 
   const {prices} = coinMarketData;
 

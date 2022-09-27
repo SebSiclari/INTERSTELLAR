@@ -5,7 +5,6 @@ import React from 'react'
 
 const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, marketCapRank,current_price, market_cap, price_change_percentage_24h}) => {
 
-console.warn(marketCapRank)
   const [isFav, setIsFav] = useState(watchList.some(coin => marketCoin.name === coin.name));
 
 

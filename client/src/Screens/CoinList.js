@@ -2,21 +2,21 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, {useState} from 'react'
 import CoinItem from '../Components/CoinItem'
 import DropDown from '../Components/DropDown'
+import MarketBar from '../Components/HeaderBar'
 
 const CoinList = ({list, setMarket, setWatchList, watchList, market}) => {
 
- console.warn(market)
   const [sortState, setSortState] = useState('Rank')
   const categories=[
     {label: 'Price', value:'Price'},
     {label: 'MarketCap', value: 'MarketCap' },
     {label: 'Rank', value: 'Rank'},
-    {label: 'PriceChange', value:'PriceChange'}
+    {label: '% Change', value:'PriceChange'}
   ]
   const [order, setOrder] = useState('ASC')
   const direction = [
-    {label: '⬆', value: 'ASC'},
-    {label: '⬇', value: 'DESC'},
+    {label: 'ASC', value: 'ASC'},
+    {label: 'DESC', value: 'DESC'},
   ]
   /*
   state = sorting, setSorting => string
@@ -59,14 +59,20 @@ dropdownMenu => setSortingState(e.target.value)
 
   return (
     <>
+    <View style={{ backgroundColor:'#121212',flexDirection:'row', justifyContent:'space-around'}}>
+    <MarketBar/>
+    <View style={{flexDirection: 'row', alignItems:'flex-end'}}>
     <DropDown
     setter={setSortState}
     data={categories}
+    // labelStyle={{textAlign:'left', fontSize:6, color:'blue'}}
     />
      <DropDown
     setter={setOrder}
     data={direction}
     />
+    </View>
+    </View>
     <View style={styles.container}>
 
       <FlatList

@@ -10,7 +10,6 @@ const CoinItem = ({marketCoin, watchList, setWatchList}) => {
   const {name, image, market_cap_rank, symbol, current_price,
   price_change_percentage_24h, market_cap, id } = marketCoin;
 
-  console.warn(price_change_percentage_24h)
 
 
   const marketCap = (marketCap) =>{
@@ -51,7 +50,7 @@ const CoinItem = ({marketCoin, watchList, setWatchList}) => {
     <Text style={market_cap_rank <= 99 ? styles.rank : styles.rankOver}>{market_cap_rank}</Text>
     </View>
     <Text style={styles.text}>{symbol}</Text>
-    <Text style={ price_change_percentage_24h > 0 ? styles.textGreen : styles.textRed}>{price_change_percentage_24h ? price_change_percentage_24h.toFixed(2) : null}</Text>
+    <Text style={ price_change_percentage_24h > 0 ? styles.textGreen : styles.textRed}>{price_change_percentage_24h ? price_change_percentage_24h.toFixed(2) : null}%</Text>
     </View>
     </View>
     <View style={{marginLeft:'auto'}}>

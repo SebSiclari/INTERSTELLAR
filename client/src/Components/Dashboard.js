@@ -6,7 +6,6 @@ const  DashBoard = () => {
 
   return(
     <View style={styles.container}>
-      <Text>DashBoard</Text>
       <MyTabs/>
     </View>
 

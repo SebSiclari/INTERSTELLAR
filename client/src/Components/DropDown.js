@@ -10,13 +10,15 @@ const DropDown = ({setter, data}) => {
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
+        valueField='black'
+        containerStyle={styles.containerStyle}
+        itemTextStyle={styles.dropdownText}
+        inputSearchStyle={{backgroundColor:'black'}}
+        activeColor='#121212'
+        search={false}
         data={data}
-        maxHeight={300}
         labelField="label"
-        valueField="value"
         placeholder="Sortby"
-        searchPlaceholder="Criteria..."
         value={value}
         onChange={item => {
         setValue(item.value)
@@ -30,24 +32,44 @@ export default DropDown
 
 const styles = StyleSheet.create({
   dropdown: {
-    margin: 16,
-    height: 30,
+    margin: 5,
+    height: 20,
+    width:80,
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
+    backgroundColor:'#585858',
+    color:'white',
+    justifyContent:'center',
+    textAlign:'center',
+    borderRadius:10
+
+  },
+  containerStyle:{
     backgroundColor:'#121212',
   },
+  dropdownText : {
+    color: 'white',
+    backgroundColor:'#121212',
+    fontSize:8,
+    justifyContent:'center',
+  },
+  selectedOne:{
+    backgroundColor:'#121212'
+  },
   placeholderStyle: {
-    fontSize: 12,
-    color:'white'
+    fontSize: 10,
+    color:'white',
+    textAlign:'center',
+    justifyContent:'center'
   },
   selectedTextStyle: {
-    fontSize: 12,
+    fontSize: 10,
     color:'white',
-    backgroundColor:'#121212'
+    backgroundColor:'#585858',
+    justifyContent:'center',
+    textAlign: 'center'
   },
-  inputSearchStyle: {
-    height: 20,
-    fontSize: 16,
-    backgroundColor:'#121212'
-  },
+  labelStyle:{
+    fontSize:10,
+  }
 })

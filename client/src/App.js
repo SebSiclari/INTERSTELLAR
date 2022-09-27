@@ -21,7 +21,10 @@ const App = () => {
   return (
 
     <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerStyle :{
+      backgroundColor: '#121212',
+      color:'white'
+    }}}>
     {/* <Stack.Screen name='Login' component={LogIn}/> */}
     <Stack.Screen name="Dashboard" component={Dashboard}/>
     <Stack.Screen name='CoinDetails' component={CoinDetails}/>

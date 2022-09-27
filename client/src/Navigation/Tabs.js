@@ -37,7 +37,9 @@ function MyTabs() {
   }, [])
   return (
     <>
-    <Tab.Navigator  screenOptions={{headerShown:false}} >
+    <Tab.Navigator  screenOptions={{headerShown:false, tabBarStyle:{
+      backgroundColor:'#121212'
+    }}} >
     <Tab.Screen name="Market"  >
       {(props)=> <CoinList  setMarket={setMarket} setWatchList={setWatchList} list={'market'} {...childProps} />}
     </Tab.Screen>

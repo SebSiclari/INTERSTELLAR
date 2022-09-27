@@ -9,6 +9,7 @@ Pressable} from 'react-native'
   import { getMarketData } from '../Stores/requests';
   import CoinItem from '../Components/CoinItem';
   import { NavigationContainer, useNavigation } from '@react-navigation/native';
+  import MarketBar from '../Components/HeaderBar';
 // import {connect} from 'react-redux'
 // import {getCoinMarket} from '../stores/market/marketActions'
 
@@ -58,21 +59,18 @@ const Market = () => {
 
 
   return (
-    <View style={styles.container}>
-    <FlatList
-    data={coins}
-    keyExtractor={item=> item._id}
-    renderItem = {({item})=> <CoinItem  marketCoin={item} />}
-    onEndReached={()=> fetchCoins((coins.length/100)+1)}
-    refreshControl={
-      <RefreshControl
-      refreshing={loading}
-      tintColor='white'
-      onRefresh={refetchCoins}
-      />
-    } />
+    <><MarketBar /><View style={styles.container}>
+      <FlatList
+        data={coins}
+        keyExtractor={item => item._id}
+        renderItem={({ item }) => <CoinItem marketCoin={item} />}
+        onEndReached={() => fetchCoins((coins.length / 100) + 1)}
+        refreshControl={<RefreshControl
+          refreshing={loading}
+          tintColor='white'
+          onRefresh={refetchCoins} />} />
       <Text style={styles.text}></Text>
-    </View>
+    </View></>
   )
 }
 
