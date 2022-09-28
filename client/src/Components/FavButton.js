@@ -1,6 +1,7 @@
-import { StyleSheet, Text, Pressable, Image, View } from 'react-native'
+import { StyleSheet, Text, Pressable, Image, View, Button } from 'react-native'
 import{useState} from 'react'
 import React from 'react'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 
 const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, marketCapRank,current_price, market_cap, price_change_percentage_24h}) => {
@@ -76,7 +77,7 @@ const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, ma
     return (
     <Pressable style={styles.button} onPress={
       isFav ? handleRemove : handleAdd }>
-       <Text style={{color:'white'}}>{isFav ? 'X': 'Add'}</Text>
+       {isFav ? <Image style={styles.stars} resizeMode='cover' source={require('../Assets/fullOnStar.png')}/> : <Image style={styles.stars} source={require('../Assets/emptyStar.png')}/>}
        </Pressable>
     )
 
@@ -85,14 +86,31 @@ const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, ma
 export default FavButton;
 
 const styles = StyleSheet.create({
+  buttonContainer:{
+    backgroundColor:'green',
+    height:25,
+    width:50,
+    borderRadius:10,
+    marginLeft:-20,
+    marginTop:10,
+    fontSize:1
+  },
   button:{
     height:30,
     width:30,
+    fontSize:5
   },
   image:{
     color:'#121212',
     width:30,
     height:30,
   },
+  stars:{
+    width:20,
+    height:20,
+    marginTop: 7.5,
+
+  },
+
 
 })

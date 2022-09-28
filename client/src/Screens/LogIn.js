@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import {View, TextInput, Pressable,StyleSheet, Text, SafeAreaView} from 'react-native'
+import {View, TextInput, Pressable,StyleSheet, Text, SafeAreaView,ImageBackground, Image} from 'react-native'
 import {authentication} from '../../firebase/firebase-config'
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import {signInWithEmailAndPassword, signOut} from 'firebase/auth';
@@ -35,7 +35,7 @@ const LogIn = () => {
   const SignInUser = () => {
     signInWithEmailAndPassword(authentication, email, password)
       .then(re => {
-        console.log(re);
+        // console.log(re);
         setIsSignedIn(true);
       })
       .catch(e => {
@@ -58,11 +58,12 @@ const LogIn = () => {
   }
 
   return (
-    <SafeAreaView style={{backgroundColor:'#121212',flex:1}}>
+    <SafeAreaView style={{backgroundColor:'#121212',flex:1, justifyContent:'center', alignItems: 'center'}}>
+    <Image  resizeMode='cover' style={{height:200, width:200, alignSelf:'center'}} source={require('../Assets/bull-market.png')}/>
     <View style={styles.Login}>
     <View style={styles.inputContainers}>
     <TextInput
-    style={{color:'white'}}
+    style={{color:'white', borderBottomWidth:1, borderColor:'white', padding:10}}
     placeholder="Email"
     placeholderTextColor={'white'}
     value={email}
@@ -70,7 +71,7 @@ const LogIn = () => {
         />
 
         <TextInput
-          style={{color:'white'}}
+          style={{color:'white', padding:12, borderBottomWidth:1, borderColor:'white', marginBottom:20, marginTop:20 }}
           placeholder="Password"
           value={password}
           placeholderTextColor={'white'}
@@ -78,10 +79,11 @@ const LogIn = () => {
           onChangeText={text => setPassword(text)}
         />
         </View>
-
+        <View style={{justifyContent:'center', alignItems:'center', marginBottom:55}}>
       <Pressable  style={styles.button} onPress={SignInUser}>
         <Text style={styles.buttonText} onPress={handleNavigation}> SIGN IN </Text>
       </Pressable>
+      </View>
 
       </View>
       </SafeAreaView>
@@ -95,15 +97,18 @@ const LogIn = () => {
 const styles = StyleSheet.create({
   button:{
     height:30,
-    backgroundColor:'black',
+    width:150,
+    borderRadius:10,
+    backgroundColor:'#e2b13c',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    textAlign:'center'
   },
   buttonText:{
     color:'white'
   },
   Login:{
-    marginTop:300,
+    marginTop:30,
     color:'white'
   },
   inputContainers:{

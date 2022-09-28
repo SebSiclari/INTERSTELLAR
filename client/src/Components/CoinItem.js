@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View, Image, Pressable} from 'react-native'
 import React from 'react'
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import WatchList from '../Screens/WatchList';
+import {  useNavigation } from '@react-navigation/native';
 
 
 
-const CoinItem = ({marketCoin, watchList, setWatchList}) => {
+const CoinItem = ({marketCoin,setSelected}) => {
 
   const {name, image, market_cap_rank, symbol, current_price,
   price_change_percentage_24h, market_cap, id } = marketCoin;
@@ -24,8 +23,8 @@ const CoinItem = ({marketCoin, watchList, setWatchList}) => {
   const navigation= useNavigation();
 
   const handleNavigation=()=>{
-     navigation.navigate('CoinDetails', {marketCoin,
-    watchList, setWatchList})
+    setSelected(marketCoin);
+     navigation.navigate('CoinDetails')
   }
 
   return (

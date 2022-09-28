@@ -76,13 +76,13 @@ const Profile = () => {
     title='Launch'
     value='Home'
     type='button'
-    onPress={()=>{ console.warn('working')}}
+    onPress={()=>{ }}
      />
       <Setting
     title='Appearance'
     value='Dark'
     type='button'
-    onPress={()=>{ console.warn('working')}}
+    onPress={()=>{ }}
      />
      <SectionTitle
     title='Account'
@@ -91,13 +91,13 @@ const Profile = () => {
     title='Payment Currency'
     value='USD'
     type='button'
-    onPress={()=>{ console.warn('Pressed')}}
+    onPress={()=>{ }}
      />
       <Setting
     title='Appearance'
     value='Dark'
     type='button'
-    onPress={()=>{ console.warn('Pressed')}}
+    onPress={()=>{ }}
      />
      <SectionTitle
     title='Security'

@@ -8,9 +8,9 @@ import CoinList from "../Screens/CoinList";
 import { getMarketData } from "../Stores/requests";
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MyTabs(props) {
   const [market, setMarket] = useState()
-  const [watchList, setWatchList] = useState([])
+  const {watchList, setWatchList, setSelected} = props
   async function getListData (){
     // set list states with api calls
     const marketList= await getMarketData(1);
@@ -30,7 +30,8 @@ function MyTabs() {
   const childProps ={
     setWatchList,
     watchList,
-    market
+    market,
+    setSelected
   }
   useEffect(()=>{
     getListData()
@@ -41,12 +42,11 @@ function MyTabs() {
       backgroundColor:'#121212'
     }}} >
     <Tab.Screen name="Market"  >
-      {(props)=> <CoinList  setMarket={setMarket} setWatchList={setWatchList} list={'market'} {...childProps} />}
+      {(props)=> <CoinList  list={'market'} {...childProps} />}
     </Tab.Screen>
     <Tab.Screen name="WatchList" >
-      {(props)=> <CoinList  setMarket={setMarket} setWatchList={setWatchList} list={'watchList'} {...childProps}/>}
+      {(props)=> <CoinList  list={'watchList'} {...childProps}/>}
     </Tab.Screen>
-    <Tab.Screen name='Profile' component={Profile} />
     </Tab.Navigator>
 
     </>

@@ -1,27 +1,20 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
-import {View, Text,Image, ActivityIndicator, Dimensions, TextInput,StyleSheet} from 'react-native'
-// import {AntDesign} from 'react-native-vector-icons'
-import { useRoute } from '@react-navigation/native';
+import {View, Text, ActivityIndicator, Dimensions, TextInput,StyleSheet} from 'react-native'
 import { getDetailedCoinData, getMarketData, getChartData } from '../Stores/requests';
-import Animated from 'react-native-reanimated';
-import {ChartDot, ChartPath, ChartPathProvider} from '@rainbow-me/animated-charts';
 import CoinDetailHeader from '../Components/CoinDetailHeader';
 import { LineChart } from 'react-native-wagmi-charts';
 import Filters from '../Components/Filters';
 
 
-const CoinDetails = ({ route,  navigation}) => {
+const CoinDetails = (props) => {
 // price state to be updated
-
-
-
+  console.log({props})
   const [coin, setCoin] = useState(null);
   const [coinMarketData, setCoinMarketData]= useState(null);
   // const [currPrice, setCurrPrice] = useState(coin.market_data.current_price)
 
-  const {marketCoin, setWatchList, watchList} = route.params
-
+ const {selected} = props
 
   const [loading, setLoading]= useState(false);
   const [coinValue, setCoinValue]= useState('1');
@@ -31,9 +24,9 @@ const CoinDetails = ({ route,  navigation}) => {
 
   const fetchCoinData = async()=>{
     setLoading(true)
-    const fetchedCoinData = await getDetailedCoinData(marketCoin.id);
-    const fetchMarketData= await getChartData(marketCoin.id);
-    console.log('FECHED DATA', fetchedCoinData)
+    const fetchedCoinData = await getDetailedCoinData(selected.id);
+    const fetchMarketData= await getChartData(selected.id);
+    // console.log('FECHED DATA', fetchedCoinData)
     setCoin(fetchedCoinData);
     setCoinMarketData(fetchMarketData);
     setUsdValue(fetchedCoinData.market_data.current_price.usd.toString())
@@ -41,7 +34,7 @@ const CoinDetails = ({ route,  navigation}) => {
   }
 
   const fetchMarketCoinData = async (selectedRangeValue) =>{
-    const fetchedCoinMarketData = await getChartData(marketCoin.id, selectedRangeValue)
+    const fetchedCoinMarketData = await getChartData(selected.id, selectedRangeValue)
     setCoinMarketData(fetchedCoinMarketData);
     setLoading(false);
   }
@@ -116,13 +109,13 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
     <View style={styles.container}>
     <CoinDetailHeader
     current_price={current_price}
-    marketCoin={marketCoin}
-    setWatchList={setWatchList}
+    marketCoin={selected}
+    setWatchList={props.setWatchList}
     image={small}
-    watchList={watchList}
+    watchList={props.watchList}
     symbol={symbol}
     marketCapRank={market_cap_rank}
-    coinId={marketCoin.id}
+    coinId={selected.id}
     name={coin.name}
     price_change_percentage_24h={ price_change_percentage_24h}
     market_cap={1111}

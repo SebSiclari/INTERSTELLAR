@@ -4,7 +4,7 @@ import CoinItem from '../Components/CoinItem'
 import DropDown from '../Components/DropDown'
 import MarketBar from '../Components/HeaderBar'
 
-const CoinList = ({list, setMarket, setWatchList, watchList, market}) => {
+const CoinList = ({list, setWatchList, watchList, market, setSelected}) => {
 
   const [sortState, setSortState] = useState('Rank')
   const categories=[
@@ -18,12 +18,8 @@ const CoinList = ({list, setMarket, setWatchList, watchList, market}) => {
     {label: 'ASC', value: 'ASC'},
     {label: 'DESC', value: 'DESC'},
   ]
-  /*
-  state = sorting, setSorting => string
-    rates
-    %
-  */
-  const sortedListData = list === 'watchList' ? watchList : market
+
+  const sortedListData = market
 
   switch(sortState){
     case 'Price':
@@ -40,23 +36,19 @@ const CoinList = ({list, setMarket, setWatchList, watchList, market}) => {
       sortedListData?.sort((a,b)=>order === 'ASC'?a.price_change_percentage_24h - b.price_change_percentage_24h : b.price_change_percentage_24h - a.price_change_percentage_24h)
 
   }
-  /*
-listData.sort((a, b)=>{
-  switch case checking sorting state
-    sort by different properties
-})
 
-dropdownMenu => setSortingState(e.target.value)
-  */
+  const names = watchList.map(item => item.name)
+  const watchData = sortedListData?.filter(coin => names.includes(coin.name)&& coin)
+  console.log({watchData})
+  // watchList.forEach(item => sortedListData.forEach(coin => {
+  //   if(item.name === coin.name) watchData.push(coin)
+  // }))
 
-
-
-  const watchData = []
-  watchList.forEach(name => market.forEach(coin => {
-    if(name === coin.name) watchData.push(coin)
-  }))
-
-
+  const childProps ={
+    watchList,
+    setWatchList,
+    setSelected
+  }
   return (
     <>
     <View style={{ backgroundColor:'#121212',flexDirection:'row', justifyContent:'space-around'}}>
@@ -76,9 +68,9 @@ dropdownMenu => setSortingState(e.target.value)
     <View style={styles.container}>
 
       <FlatList
-        data={sortedListData}
+        data={list === 'watchList' ? watchData : sortedListData}
         keyExtractor={(item) => item._id}
-        renderItem={({ item }) => <CoinItem marketCoin={item} watchList={watchList} setWatchList={setWatchList} />} />
+        renderItem={({ item }) => <CoinItem key={item._id} marketCoin={item} {...childProps} />} />
     </View></>
   )
 }

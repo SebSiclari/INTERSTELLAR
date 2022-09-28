@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import MyTabs from '../Navigation/Tabs';
 import { StyleSheet,
   Text,
   View,
@@ -63,7 +62,7 @@ const Market = () => {
       <FlatList
         data={coins}
         keyExtractor={item => item._id}
-        renderItem={({ item }) => <CoinItem marketCoin={item} />}
+        renderItem={({ item }) => <CoinItem key={item._id} marketCoin={item} />}
         onEndReached={() => fetchCoins((coins.length / 100) + 1)}
         refreshControl={<RefreshControl
           refreshing={loading}

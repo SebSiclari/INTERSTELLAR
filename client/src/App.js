@@ -18,6 +18,9 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
 
+  const [watchList, setWatchList] = useState([])
+  const [selected, setSelected]= useState(null);
+  const compProp = {watchList, setWatchList, selected, setSelected}
   return (
 
     <NavigationContainer>
@@ -26,8 +29,12 @@ const App = () => {
       color:'white'
     }}}>
     {/* <Stack.Screen name='Login' component={LogIn}/> */}
-    <Stack.Screen name="Dashboard" component={Dashboard}/>
-    <Stack.Screen name='CoinDetails' component={CoinDetails}/>
+    <Stack.Screen name="Dashboard">
+      {(props)=><Dashboard {...compProp}/>}
+    </Stack.Screen>
+    <Stack.Screen name='CoinDetails' >
+    {(props)=><CoinDetails {...compProp}/>}
+    </Stack.Screen>
     </Stack.Navigator>
     </NavigationContainer>
   );
