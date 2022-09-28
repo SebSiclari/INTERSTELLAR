@@ -28,7 +28,7 @@ const App = () => {
       backgroundColor: '#121212',
       color:'white'
     }}}>
-    {/* <Stack.Screen name='Login' component={LogIn}/> */}
+    <Stack.Screen name='Login' component={LogIn}/>
     <Stack.Screen name="Dashboard">
       {(props)=><Dashboard {...compProp}/>}
     </Stack.Screen>

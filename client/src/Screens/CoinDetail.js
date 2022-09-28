@@ -212,7 +212,7 @@ const styles= StyleSheet.create({
     justifyContent:'space-evenly'
   },
   input:{
-    width:100,
+    width:120,
     height:40,
     borderBottomWidth: 1,
     borderBottomColor:'white',
