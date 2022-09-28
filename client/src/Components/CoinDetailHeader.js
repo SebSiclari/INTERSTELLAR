@@ -1,61 +1,9 @@
 import { StyleSheet, Text, View,Image, Button } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import Ionicons from 'react-native-vector-icons'
-import FavButton from '../Components/FavButton'
+import FavButton from './FavButton'
 
 export default function CoinDetailHeader({setWatchList, marketCoin,watchList,coinId, image, symbol, marketCapRank, price_change_percentage_24h, current_price, market_cap, name}) {
-
-
-
-
-  // const addCoinToWatchList= async (coin) =>{
-
-  //   const response = await fetch('http://localhost:3005/coins',{
-  //     method:'POST',
-  //     headers:{
-  //       Accept:'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       name: name,
-  //       image:image,
-  //       marketCapRank:marketCapRank,
-  //       symbol:symbol,
-  //       currentPrice: current_price,
-  //       priceChangePercentage:price_change_percentage,
-  //       market_cap:market_cap
-  //     })
-  //   })
-
-  //   const data = await response.json();
-
-  //   return data
-
-  // }
-
-
-  // async function addCoinHandler(e) {
-  //   e.preventDefault();
-  //   const newCoin ={
-  //     name: name,
-  //     image: image,
-  //     symbol: symbol,
-  //     marketCapRank: marketCapRank,
-  //     currentPrice: current_price,
-  //     priceChangePercentage:price_change_percentage,
-  //     market_cap:market_cap
-  //   }
-
-
-  //   const newFavoriteCoin= await addCoinToWatchList(newCoin);
-  //   // setWatchList(prev=>[...prev, newFavoriteCoin ])
-  // }
-
-
-
-
-
-
 
 
   return (

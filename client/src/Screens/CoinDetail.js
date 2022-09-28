@@ -8,11 +8,11 @@ import Filters from '../Components/Filters';
 
 
 const CoinDetails = (props) => {
+  
 // price state to be updated
   console.log({props})
   const [coin, setCoin] = useState(null);
   const [coinMarketData, setCoinMarketData]= useState(null);
-  // const [currPrice, setCurrPrice] = useState(coin.market_data.current_price)
 
  const {selected} = props
 
@@ -26,7 +26,6 @@ const CoinDetails = (props) => {
     setLoading(true)
     const fetchedCoinData = await getDetailedCoinData(selected.id);
     const fetchMarketData= await getChartData(selected.id);
-    // console.log('FECHED DATA', fetchedCoinData)
     setCoin(fetchedCoinData);
     setCoinMarketData(fetchMarketData);
     setUsdValue(fetchedCoinData.market_data.current_price.usd.toString())
@@ -69,8 +68,6 @@ if(loading || !coin) {return <ActivityIndicator size='large'/>}
 
   const {prices} = coinMarketData;
 
-  // const [coinValue, setCoinValue]= useState('1');
-  // const [usdValue, setUsdValue] = useState('');
 
   const screenWidth=Dimensions.get('window').width
 

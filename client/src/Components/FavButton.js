@@ -1,7 +1,6 @@
 import { StyleSheet, Text, Pressable, Image, View, Button } from 'react-native'
 import{useState} from 'react'
 import React from 'react'
-import Entypo from 'react-native-vector-icons/Entypo'
 
 
 const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, marketCapRank,current_price, market_cap, price_change_percentage_24h}) => {
@@ -40,13 +39,6 @@ const FavButton = ({marketCoin, setWatchList, watchList, name, image, symbol, ma
     })
   }
 
-
-
-
-  /*
-   update state (watchlist); => rendering of components
-   update database => in sync with data
-  */
   const handleRemove=()=>{
     setIsFav(false)
     deleteCoin()

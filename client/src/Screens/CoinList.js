@@ -39,10 +39,7 @@ const CoinList = ({list, setWatchList, watchList, market, setSelected}) => {
 
   const names = watchList.map(item => item.name)
   const watchData = sortedListData?.filter(coin => names.includes(coin.name)&& coin)
-  console.log({watchData})
-  // watchList.forEach(item => sortedListData.forEach(coin => {
-  //   if(item.name === coin.name) watchData.push(coin)
-  // }))
+  
 
   const childProps ={
     watchList,
@@ -57,7 +54,6 @@ const CoinList = ({list, setWatchList, watchList, market, setSelected}) => {
     <DropDown
     setter={setSortState}
     data={categories}
-    // labelStyle={{textAlign:'left', fontSize:6, color:'blue'}}
     />
      <DropDown
     setter={setOrder}

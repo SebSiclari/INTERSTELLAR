@@ -1,37 +1,20 @@
 import React from 'react';
 import {useState} from 'react';
-import {View, TextInput, Pressable,StyleSheet, Text, SafeAreaView,ImageBackground, Image} from 'react-native'
+import {View, TextInput, Pressable,StyleSheet, Text, SafeAreaView, Image} from 'react-native'
 import {authentication} from '../../firebase/firebase-config'
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
-import {signInWithEmailAndPassword, signOut} from 'firebase/auth';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 const LogIn = () => {
 
   const navigation = useNavigation()
-
-
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  // text inputs state
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // const RegisterUser = () => {
-
-  //   createUserWithEmailAndPassword(authentication, email, password)
-  //     .then(re => {
-  //       console.log(re);
-  //       setIsSignedIn(true);
-  //     })
-  //     .catch(re => {
-  //       console.log(re);
-  //     });
-  // };
-
   const SignInUser = () => {
     signInWithEmailAndPassword(authentication, email, password)
       .then(re => {
@@ -43,15 +26,6 @@ const LogIn = () => {
       });
   };
 
-  // const SignOutUser = () => {
-  //   signOut(authentication)
-  //     .then(re => {
-  //       console.log(re);
-  //     })
-  //     .catch(e => {
-  //       console.log(e);
-  //     });
-  // };
 
   const handleNavigation=()=>{
     navigation.navigate('Dashboard')

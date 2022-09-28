@@ -7,11 +7,7 @@ import Market from './Screens/Market';
 import MyTabs from './Navigation/Tabs';
 import Dashboard from './Components/Dashboard'
 import CoinDetails from './Screens/CoinDetail';
-// import { Provider } from 'react-redux';
-// import {createStore} from 'redux';
-// import { marketReducer } from './Stores/Market/marketReducer';
 
-// const store = createStore(marketReducer)
 
 
 const Stack = createNativeStackNavigator();

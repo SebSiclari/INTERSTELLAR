@@ -3,14 +3,12 @@ import { StyleSheet,
   Text,
   View,
   FlatList,
-RefreshControl,
-Pressable} from 'react-native'
+RefreshControl} from 'react-native'
   import { getMarketData } from '../Stores/requests';
   import CoinItem from '../Components/CoinItem';
-  import { NavigationContainer, useNavigation } from '@react-navigation/native';
+  import {  useNavigation } from '@react-navigation/native';
   import MarketBar from '../Components/HeaderBar';
-// import {connect} from 'react-redux'
-// import {getCoinMarket} from '../stores/market/marketActions'
+
 
 const Market = () => {
 
@@ -75,20 +73,7 @@ const Market = () => {
 
 export default Market;
 
-// function mapStateToProps(state){
-//   return {
-//     coins: state.marketReducer.coins
-//   }
-// }
 
-// function mapDispatchToProps(dispatch){
-//   return{
-//     // @ts-ignore
-//     getCoinMarket:(currency, coinList, orderBy, sparkline, priceChangePerc, perPage, page)
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Market);
 
 const styles = StyleSheet.create({
   container:{
